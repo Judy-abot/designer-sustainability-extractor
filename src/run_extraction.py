@@ -1,21 +1,4 @@
-"""
-Apply material_extractor.extract_signals() across the full joined dataset
-and report coverage stats -- how many listings got a specific material,
-a certification, or a specific attribute hit, versus none at all.
 
-This is the empirical check for Open Question #2: whether the rule-based
-dictionary alone gets meaningful coverage on listing text, or whether a
-large share of "no signal" listings are actually the vague-claim gap the
-zero-shot layer is meant to close, rather than genuinely having nothing
-sustainability-related to say.
-
-Run from the project root:
-    python3 src/run_extraction.py
-
-Writes data/processed/extracted_signals.csv (one row per listing, with
-materials/certifications/attributes as pipe-joined strings) and prints
-summary coverage stats to the terminal.
-"""
 
 import csv
 import os

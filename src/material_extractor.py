@@ -2,15 +2,6 @@
 Rule-based extraction of material composition and sustainability
 certifications from Etsy listing text (title + tags + materials +
 description).
-
-This is the primary extractor. Named materials and certifications are a
-closed, enumerable vocabulary -- a keyword/regex dictionary handles the
-large majority of real cases without needing a model. A separate zero-shot
-layer (not this file) handles the harder case: general sustainability
-language that doesn't use any of these specific terms ("eco-friendly",
-"conscious", "kind to the planet") -- see extract_signals()'s empty result
-on purely vague text below for exactly the gap that layer is meant to fill.
-
 USAGE
 -----
 from material_extractor import extract_signals

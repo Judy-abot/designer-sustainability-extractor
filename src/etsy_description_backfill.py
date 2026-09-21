@@ -1,51 +1,16 @@
 """
 Etsy Open API v3 description backfill for already-collected listings.
 
-WHERE TO RUN THIS
-------------------
-Same as etsy_collector.py: this script talks to https://api.etsy.com, which
-is NOT reachable from sandboxed dev environments that restrict outbound
-network access to an allowlist. Run this on your own machine, a CI runner,
-or any host with normal internet access.
-
-WHAT THIS DOES
---------------
-etsy_collector.py's find_active_listings() call (GET /listings/active) very
-likely already receives a `description` field on every listing -- it's a
-standard field on Etsy's Listing resource -- but etsy_collector.py never
-reads it out, and no raw API response was ever saved. This script re-fetches
-just that one field for listings you already collected, keyed by the
-listing_ids already in data/raw/listings.csv, using Etsy's batch endpoint
-(GET /listings/batch, up to 100 listing_ids per call) -- NOT by re-running
-the taxonomy search, which would drift from your original dataset over time
-as listings sell out, get edited, or go inactive.
-
-SETUP
------
-Same credentials as etsy_collector.py:
-    export ETSY_API_KEY="your_keystring_here"
-    export ETSY_SHARED_SECRET="your_shared_secret_here"
-
-Run from the project root:
-    python src/etsy_description_backfill.py
 
 OUTPUT
 ------
 Writes data/raw/descriptions.csv with columns: listing_id, description.
 Kept separate from listings.csv on purpose, so this can't accidentally
-clobber your existing collected data -- join the two on listing_id in a
+clobber your existing collected data, join the two on listing_id in a
 later step (e.g. features.py or a small merge script). Resumable: rerunning
 skips listing_ids already in the output file, same pattern as
 etsy_collector.py's resume support.
 
-NOTE ON TESTING
----------------
-This was written against Etsy's documented /listings/batch endpoint and
-mirrors etsy_collector.py's already-working auth, retry, and resumable-CSV
-patterns exactly -- but it hasn't been run against the live API (this
-environment can't reach api.etsy.com either). Run it and check the first
-few rows of descriptions.csv before trusting the full run; if the batch
-endpoint rejects anything, the error message will say why.
 """
 
 import csv

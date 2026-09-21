@@ -1,22 +1,6 @@
 """
 Diagnostic on run_extraction.py's output.
 
-Splits the raw "material match" count from run_extraction.py into two very
-different things it currently lumps together:
-  - modifier-bearing hits: "organic cotton", "recycled polyester",
-    "deadstock fabric", "vegan leather", etc -- an explicit
-    sustainability-signaling word attached to the material
-  - bare hits: plain "cotton", "wool", "silk", etc -- the dictionary
-    matches these too, but on their own they're just a fabric name, not
-    a claim
-
-Also samples a handful of listings with NO dictionary match at all, so you
-can eyeball whether "no match" mostly means "genuinely nothing to say" or
-"a fabric word this first-pass dictionary doesn't have yet" (spandex,
-elastane, viscose, denim, cashmere, ...) -- that distinction is what
-decides whether the gap is really zero-shot's job to close, or just a
-dictionary that needs a few more entries.
-
 Run from the project root:
     python3 src/diagnose_coverage.py
 """

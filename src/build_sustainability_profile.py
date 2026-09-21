@@ -4,10 +4,10 @@ Vague claim only / No signal, combining the rule-based dictionary
 (material_extractor.py / run_extraction.py) with the zero-shot layer
 (detect_vague_claims.py).
 
-TIER LOGIC (most to least verifiable)
+TIER LOGIC 
 --------------------------------------
-1. Certified        -- a named certification was found (GOTS, etc).
-2. Specific claim    -- no certification, but a modifier-bearing material
+1. Certified             a named certification was found (GOTS, etc).
+2. Specific claim        no certification, but a modifier-bearing material
                         (organic cotton, recycled polyester, deadstock
                         fabric, vegan leather, ...) or a meaningful
                         attribute (deadstock, upcycled, recycled, vegan)
@@ -16,12 +16,12 @@ TIER LOGIC (most to least verifiable)
                         sustainability one, and including it would inflate
                         this tier with listings that aren't actually
                         making an environmental claim at all.
-3. Vague claim only  -- no specific material/attribute/cert, but the
+3. Vague claim only     no specific material/attribute/cert, but the
                         zero-shot layer flagged a general sustainability
                         claim (e.g. "kind to our environment"). This tier
                         IS the greenwashing flag from the original brief:
                         a real claim, with nothing specific behind it.
-4. No signal         -- everything else: a bare material only (plain
+4. No signal            everything else: a bare material only (plain
                         "cotton", not a claim), or genuinely nothing
                         found by either layer. Swatch/sample listings
                         that were excluded from zero-shot classification
@@ -29,7 +29,7 @@ TIER LOGIC (most to least verifiable)
                         actually asked the question.
 
 A bare material (plain "cotton", "wool") on its own does NOT count as a
-signal for tier 2 -- see material_extractor.py's own docstring: it's a
+signal for tier 2, see material_extractor.py's own docstring: it's a
 fabric name, not a claim.
 
 Run from the project root:

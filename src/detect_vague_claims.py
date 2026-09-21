@@ -1,41 +1,12 @@
 """
-Zero-shot detection of vague/general sustainability claims, run ONLY on
-the listings material_extractor.py found nothing specific in.
-
-Why only the no-match subset, not all 4,500: the diagnostic
-(diagnose_coverage.py) showed the rule-based dictionary already catches
-the actual, specific claims (organic cotton, GOTS, deadstock, etc) at
-204/4500, and an 8-listing sample of the no-match group showed most of it
-is genuinely unrelated content (style, fit, occasion), not vague
-sustainability language slipping past the keywords. Running an expensive
-model over every listing to re-confirm what a keyword search already
-settled -- or to find nothing on listings that have nothing to find --
-wastes time for no benefit. This model earns its keep specifically on the
-no-match subset, to tell apart two different things within it:
-  - genuinely unrelated content (most of the sample looked like this)
-  - a real but vague sustainability claim with no specific material/cert
-    named ("kind to our environment", "sustainable fashion")
-
-NOTE ON TESTING
----------------
-This uses the `transformers` zero-shot-classification pipeline
-(facebook/bart-large-mnli), which downloads the model from Hugging Face on
-first run -- not reachable from this sandboxed environment, so I couldn't
-run this one end-to-end myself the way I did the earlier scripts. The
-surrounding CSV read/filter logic is the same pattern already verified in
-run_extraction.py and was tested separately; the model call itself follows
-the standard, documented transformers pipeline usage. Run the --limit
-version first to confirm it works before committing to the full run.
 
 SETUP
 -----
-Already installed and confirmed working (transformers 4.57.6, torch 2.2.2).
-First run downloads the model, ~1.6GB -- only happens once, then it's
-cached locally.
+(transformers 4.57.6, torch 2.2.2).
+First run downloads the model, ~1.6GB 
 
-Run from the project root:
-    python3 src/detect_vague_claims.py --limit 20   # quick smoke test first
-    python3 src/detect_vague_claims.py               # full run
+Run from the project root:  
+    python3 src/detect_vague_claims.py          
 
 Reads data/processed/listings_with_descriptions.csv and
 data/processed/extracted_signals.csv. Writes
