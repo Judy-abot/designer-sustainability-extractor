@@ -1,36 +1,4 @@
-"""
-Sustainability Intelligence -- Streamlit app.
 
-Filters and displays the 4,500 listings by sustainability tier
-(Certified / Specific claim / Vague claim only / No signal), showing the
-extracted materials/certifications/attributes next to the original
-listing text so the extraction can be checked against the source rather
-than trusted blindly.
-
-Run from the project root:
-    streamlit run app.py
-
-Expects:
-    data/processed/listings_with_descriptions.csv
-    data/processed/sustainability_profiles.csv
-
-NOTE ON TESTING
-----------------
-This environment can't run a Streamlit server, so the UI itself (layout,
-widgets) hasn't been visually verified -- it follows the same st.* patterns
-your Projects 1 and 2 apps already use successfully. What WAS tested here:
-the data loading and merge logic. Two real bugs were caught and fixed
-before this ever touched the UI code:
-  1. Both source files have a `materials` column with different meaning
-     (raw Etsy field vs. extracted canonical list) -- a naive merge would
-     have silently renamed them to materials_x/materials_y and broken
-     every reference to `materials` in the display code.
-  2. An empty materials/certifications/attributes cell comes back from
-     pandas as NaN, not an empty string -- splitting that naively would
-     have displayed the literal text "nan" as a fake material.
-Both are handled below (see load_data()). Run it and tell me what breaks,
-if anything, in the parts I couldn't test myself.
-"""
 
 import pandas as pd
 import streamlit as st
