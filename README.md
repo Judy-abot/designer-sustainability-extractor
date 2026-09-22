@@ -100,3 +100,11 @@ Open API v3
   real listing text, but isn't exhaustive, some real fabric terms may
   not yet be covered.
 - "No signal" reflects absence of a *textual* claim.
+
+## Stretch analysis: does sustainability command a price premium?
+
+Certification shows a modest, real price association (median $65.23 vs.
+$54.83–$59.99 for the other tiers, USD-only, n=24 for Certified). A
+specific material claim without formal certification does not. Full
+writeup, including caveats and how a misleading mean got ruled out: see
+[`docs/price_premium_analysis.md`](docs/price_premium_analysis.md).
