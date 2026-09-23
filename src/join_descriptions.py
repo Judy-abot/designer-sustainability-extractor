@@ -1,16 +1,3 @@
-"""
-Join Project 1's listings.csv with the backfilled descriptions.csv into a
-single working dataset for the sustainability extractor.
-
-Run from the project root:
-    python3 src/join_descriptions.py
-
-Writes data/processed/listings_with_descriptions.csv -- same rows as
-listings.csv, with a `description` column added. Listings with no matching
-description (sold out / removed between collection and backfill, ~0 of
-them for a clean run) get an empty string rather than being dropped, so
-the row count stays consistent with listings.csv.
-"""
 
 import csv
 import os

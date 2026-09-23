@@ -10,9 +10,7 @@ import random
 
 from material_extractor import MATERIAL_PARENT
 
-# Every material that requires an explicit modifier word to match at all
-# (see MATERIAL_PARENT in material_extractor.py) -- these are the ones
-# that represent a real, specific sustainability signal.
+
 MODIFIER_MATERIALS = set(MATERIAL_PARENT.keys())
 
 SIGNALS_CSV = "data/processed/extracted_signals.csv"

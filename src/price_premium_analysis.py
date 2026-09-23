@@ -1,23 +1,4 @@
-"""
-Price-premium analysis: does a stronger sustainability signal correlate
-with a higher listing price?
 
-Cross-references sustainability_profiles.csv tiers with Project 1's price
-data (carried through in listings_with_descriptions.csv). This is
-descriptive, not inferential -- median/mean price per tier, with sample
-sizes shown explicitly so a small group (Certified, n=48) isn't read with
-the same confidence as a large one (No signal, n=4084).
-
-IMPORTANT: prices are in listing currency, which varies by seller region
-(the currency_code column). Mixing currencies in one average would be
-meaningless. This script checks the currency distribution first and
-restricts the comparison to the dominant currency, reporting how many
-listings (and which currencies) got excluded rather than silently
-dropping or silently including them.
-
-Run from the project root:
-    python3 src/price_premium_analysis.py
-"""
 
 import csv
 import statistics

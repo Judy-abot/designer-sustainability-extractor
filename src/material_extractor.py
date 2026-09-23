@@ -1,23 +1,4 @@
-"""
-Rule-based extraction of material composition and sustainability
-certifications from Etsy listing text (title + tags + materials +
-description).
-USAGE
------
-from material_extractor import extract_signals
 
-signals = extract_signals(
-    title="Deadstock Organic Cotton Jersey Dress",
-    materials="organic cotton",
-    tags="handmade|sustainable|deadstock",
-    description="Content: 100% Organic Cotton. GOTS certified.",
-)
-# signals == {
-#     "materials": ["organic cotton"],
-#     "certifications": ["GOTS"],
-#     "attributes": ["deadstock"],
-# }
-"""
 
 import re
 

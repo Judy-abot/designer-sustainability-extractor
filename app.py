@@ -5,8 +5,7 @@ import streamlit as st
 
 st.set_page_config(page_title="Sustainability Intelligence", layout="wide")
 
-LISTINGS_PATH = "data/processed/listings_with_descriptions.csv"
-PROFILES_PATH = "data/processed/sustainability_profiles.csv"
+DATA_PATH = "data/processed/app_data.csv"
 
 TIER_ORDER = ["Certified", "Specific claim", "Vague claim only", "No signal"]
 TIER_ICONS = {
@@ -19,21 +18,10 @@ TIER_ICONS = {
 
 @st.cache_data
 def load_data() -> pd.DataFrame:
-    listings = pd.read_csv(LISTINGS_PATH, dtype={"listing_id": str})
-    profiles = pd.read_csv(PROFILES_PATH, dtype={"listing_id": str})
-
-    # Both files have a `materials` column with different meanings (raw
-    # Etsy field vs. extracted canonical list) -- rename before merging so
-    # pandas doesn't silently turn both into materials_x/materials_y.
-    listings = listings.rename(columns={"materials": "raw_materials"})
-    merged = listings.merge(profiles, on="listing_id", how="inner")
-
-    # Empty cells come back as NaN, not "" -- fill these before any
-    # string splitting downstream, or NaN prints as the literal text "nan".
-    for col in ["materials", "certifications", "attributes"]:
-        merged[col] = merged[col].fillna("")
-
-    return merged
+    df = pd.read_csv(DATA_PATH, dtype={"listing_id": str})
+    for col in ["materials", "certifications", "attributes", "description"]:
+        df[col] = df[col].fillna("")
+    return df
 
 
 def split_field(value: str) -> list:
